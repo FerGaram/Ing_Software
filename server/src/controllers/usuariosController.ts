@@ -13,14 +13,13 @@ class UsuariosController {
         if (resp.length > 0) {
             res.json(resp[0]);
         }
-        else
-        {
-            res.status(404).json({'mensaje': 'No se encontró el usuario especificado'})
+        else {
+            res.status(404).json({});
         }
     }
 
     public async crearUsuario(req: Request, res: Response): Promise<void> {
-        const resp = pool.query('INSERT INTO usuarios SET ?', [req.body]);
+        const resp = await pool.query('INSERT INTO usuarios SET ?', [req.body]);
         res.json(resp);
     }
 
@@ -32,7 +31,7 @@ class UsuariosController {
 
     public async eliminarUsuario(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        const resp = await pool.query('DELETE FROM usuarios WHERE id = ?', id);
+        const resp = await pool.query('DELETE FROM usuarios WHERE id = ?', [id]);
         res.json(resp);
     }
 }

@@ -1,6 +1,9 @@
 import express, { Application } from 'express';
 import indexRoutes from './routes/indexRoutes';
 import usuariosRoutes from './routes/usuariosRoutes';
+import productosRoutes from './routes/productosRoutes';
+import administradorRoutes from './routes/administradorRoutes';
+
 import morgan from 'morgan';
 import cors from 'cors';
 import swagger_ui_express from 'swagger-ui-express';
@@ -23,7 +26,9 @@ class Server {
     }
     routes(): void {
         this.app.use(indexRoutes);
-        this.app.use('/api/usuarios', usuariosRoutes)
+        this.app.use('/api/usuarios', usuariosRoutes);
+        this.app.use('/api/productos', productosRoutes);
+        this.app.use('/api/administrador', administradorRoutes)
     }
     start(): void {
         this.app.listen(this.app.get('port'), () => {
