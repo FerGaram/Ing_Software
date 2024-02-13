@@ -233,8 +233,34 @@
                     }
                 }
             }
+        },
+        "/api/usuarios/validarCorreoUsuario/{correo}":{
+            "get": {
+                "tags": ["Usuarios"],
+                "summary": "Valida si el correo ya está registrado.",
+                "description": "<p>Servicio que valida si el correo ingresado ya está registrado en la base de datos.</p>",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "correo",
+                        "in": "path",
+                        "description": "Correo del usuario.",
+                        "required": true,
+                        "default": "usuario@prueba.com"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Correo válido"
+                    },
+                    "403": {
+                        "description": "Correo inválido"
+                    }
+                }
+            }
         }
-
     },
     "definitions": {
         "Usuarios": {

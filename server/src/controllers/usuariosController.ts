@@ -60,6 +60,17 @@ class UsuariosController {
             }
         }
     }
+
+    public async validarCorreoUsuario(req: Request, res: Response): Promise<void> {
+        const correo = req.params.correo;
+        const usuarios = await pool.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+        if (usuarios.length > 0) {
+            res.json({ usuarios });
+        }
+        else {
+            res.json({});
+        }
+    }
 }
 
 export const usuariosController = new UsuariosController;
