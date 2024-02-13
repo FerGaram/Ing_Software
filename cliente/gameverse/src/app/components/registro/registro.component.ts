@@ -33,7 +33,7 @@ export class RegistroComponent {
   
     // Verificar si el usuario ya existe (por ejemplo, por el correo electrónico)
     this.usuarioService.existeCorreo(this.usuarioNuevo.correo).subscribe((resUsuarios: any) => {
-      if (resUsuarios.id !== -1) {
+      if (resUsuarios.length > 0) {
         Swal.fire({
           position: 'center',
           icon: 'error',
@@ -44,6 +44,7 @@ export class RegistroComponent {
       
       // Si pasa las verificaciones, intentar crear el nuevo usuario
       console.log("GuardandoUsuario")
+      console.log(this.usuarioNuevo.correo);
       this.usuarioService.crearUsuario(this.usuarioNuevo).subscribe((res) => {
         // Elimina el código relacionado con el modal
         this.usuarioService.list().subscribe((resUsuarios: any) => {

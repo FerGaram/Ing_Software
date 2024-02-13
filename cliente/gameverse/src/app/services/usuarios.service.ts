@@ -16,7 +16,7 @@ export class UsuarioService {
   }
 
   existeCorreo(correo: any) {
-    return this.http.post(`${environment.API_URI}/usuarios/validarCorreoUsuario`, { "correo": correo });
+    return this.http.get(`${environment.API_URI}/usuarios/validarCorreoUsuario/${correo}`);
   }
 
   existeAdmin(correo: any, contrasena: any) {
