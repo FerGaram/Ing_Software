@@ -53,5 +53,18 @@ class UsuariosController {
             res.json(resp);
         });
     }
+    validarUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const parametros = req.body;
+            var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+            const resp = yield database_1.default.query(consulta);
+            if (resp.length > 0) {
+                res.json(resp);
+            }
+            else {
+                res.json({ "id": "-1" });
+            }
+        });
+    }
 }
 exports.usuariosController = new UsuariosController;

@@ -183,7 +183,57 @@
                     }
                 ]
             }
+        },
+        "/api/usuarios/validarUsuario":
+        {
+            "post":
+            {
+                "summary":"Inicia sesión en la tienda.",
+                "description": "<p>Servicio que permite el inicio de sesión de un usuario en la tienda.</p><p>&nbsp;</p><p><em><strong>¿Como iniciar sesión en la tienda?</strong></em></p>",
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Correo y contraseña del usuario que desea iniciar sesión.",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref" : "#/definitions/inicioSesion"
+                        }
+                    }
+                ],
+                "tags": ["Usuarios"],
+                "responses":
+                {
+                    "201": {
+                        "description": "OK",
+                        "examples":{
+                            "application/json":
+                            [
+                                {
+                                    "id": 1,
+                                    "correo": "usuario@prueba.com",
+                                    "nombre_usuario": "UsrPrueba",
+                                    "nombre_comp": "Usuario de Prueba"
+                                }
+                            ]
+                        },
+                        "schema":{
+                            "$ref": "#/definitions/usuarioLogueado"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
         }
+
     },
     "definitions": {
         "Usuarios": {
@@ -235,6 +285,50 @@
                 "nombre_comp": {
                     "type": "string",
                     "description": "Nombre completo del usuario"
+                }
+            }
+        },
+        "inicioSesion":
+        {
+            "type": "object",
+            "properties":
+            {
+                "correo":
+                {
+                    "type": "string",
+                    "description": "Recibe el correo del usuario."
+                },
+                "contrasena":
+                {
+                    "type": "string",
+                    "description": "Recibe la contraseña del usuario."
+                }
+            }
+        },
+        "usuarioLogueado":
+        {
+            "type": "object",
+            "properties":
+            {
+                "id":
+                {
+                    "type": "number",
+                    "description": "Guarda el id del usuario."
+                },
+                "correo":
+                {
+                    "type": "string",
+                    "description": "Guarda el correo del usuario."
+                },
+                "nombre_usuario":
+                {
+                    "type": "string",
+                    "description": "Guarda el nombre del usuario."
+                },
+                "nombre_comp":
+                {
+                    "type": "string",
+                    "description": "Guarda el nombre completo del usuario."
                 }
             }
         }

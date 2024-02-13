@@ -35,6 +35,17 @@ class UsuariosController {
         const resp = await pool.query('DELETE FROM usuarios WHERE id = ?', id);
         res.json(resp);
     }
+
+    public async validarUsuario(req: Request, res: Response): Promise<void> {
+        const parametros = req.body;
+        var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+        const resp = await pool.query(consulta);
+        if(resp.length > 0){
+            res.json(resp);
+        }else{
+            res.json({"id" : "-1"});
+        }
+    }
 }
 
 export const usuariosController = new UsuariosController;
