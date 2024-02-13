@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { newUsuario } from 'src/app/models/Usuario';
@@ -32,8 +33,19 @@ export class RegistroComponent {
     }else{
       // Si pasa las verificaciones, intentar crear el nuevo usuario
       console.log("GuardandoUsuario")
-      console.log(this.usuarioNuevo.correo);
+      console.log(this.usuarioNuevo);
       this.usuarioService.crearUsuario(this.usuarioNuevo).subscribe((res) => {
+      
+        if (res == -1) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            text: 'El correo ya está registrado en el sistema. Por favor, intente con otro correo.'
+          });
+          return;
+        }
+        
+        console.log(res);
         // Elimina el código relacionado con el modal
         this.usuarioService.list().subscribe((resUsuarios: any) => {
           this.usuarios = resUsuarios;
