@@ -25,7 +25,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-     {
+      {
         path: 'productos',
         component: ProductosComponent,
       },
@@ -35,9 +35,6 @@ const routes: Routes = [
       }
     ]
   },
-
-
-
 ];
 
 @NgModule({
