@@ -35,8 +35,15 @@ class UsuariosController {
     }
     crearUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
-            res.json(resp);
+            const correo = req.body.correo;
+            const usuarios = yield database_1.default.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+            if (usuarios.length < 1) {
+                const resp = yield database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
+                res.json(resp);
+            }
+            else {
+                res.status(404).json({ 'correoExistente': 'El correo ingresado ya se ha registrado previamente' });
+            }
         });
     }
     actualizarUsuario(req, res) {
@@ -56,13 +63,22 @@ class UsuariosController {
     validarUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const parametros = req.body;
-            var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+            var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM admins WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
             const resp = yield database_1.default.query(consulta);
             if (resp.length > 0) {
+                resp[0]["is_admin"] = 1;
                 res.json(resp);
             }
             else {
-                res.json({ "id": "-1" });
+                var consulta2 = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+                const resp2 = yield database_1.default.query(consulta2);
+                if (resp2.length > 0) {
+                    resp2[0]["is_admin"] = 0;
+                    res.json(resp2);
+                }
+                else {
+                    res.json({ "id": "-1" });
+                }
             }
         });
     }

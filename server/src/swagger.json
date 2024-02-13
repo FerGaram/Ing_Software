@@ -3,7 +3,7 @@
     "info": {
         "version": "1.0.0",
         "title": "REST API GameVerse",
-        "description": "<html><body>Esta es la documentación de la API para la plataforma de juegos GameVerse.</body></html>",
+        "description": "<html><body>Esta es la documentación de la API para el sistema de Investigación Docencia.<p>Para poder usar esta API es necesario solicitar el token y con esto poder utilizar los servicios proporcionados.</p><br><p><b>Autenticación y token de API</b></p><p>La Universidad Tecnológica de la Mixteca (UTM) proporciona el api-token. Una vez que haya creado y confirmado su cuenta.</p></body></html>",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
@@ -15,14 +15,6 @@
         {
             "name": "Usuarios",
             "description": "API para obtener información de los usuarios de GameVerse"
-        },
-        {
-            "name": "Productos",
-            "description": "API para obtener información de los productos de GameVerse"
-        },
-        {
-            "name": "Administrador",
-            "description": "API para obtener información de los administradores de GameVerse"
         }
     ],
     "schemes": [
@@ -192,320 +184,57 @@
                 ]
             }
         },
-        "/api/productos/mostrarTodosProductos": {
-            "get": {
-                "tags": [
-                    "Productos"
+        "/api/usuarios/validarUsuario":
+        {
+            "post":
+            {
+                "summary":"Inicia sesión en la tienda.",
+                "description": "<p>Servicio que permite el inicio de sesión de un usuario en la tienda.</p><p>&nbsp;</p><p><em><strong>¿Como iniciar sesión en la tienda?</strong></em></p>",
+                "produces":
+                [
+                    "application/json"
                 ],
-                "summary": "Listado de todos los productos de GameVerse",
-                "description": "<p>Servicio que devuelve la información completa de todos los productos registrados en la plataforma de GameVerse.</p>",
-                "responses": {
-                    "200": {
+                "parameters":
+                [
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Correo y contraseña del usuario que desea iniciar sesión.",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref" : "#/definitions/inicioSesion"
+                        }
+                    }
+                ],
+                "tags": ["Usuarios"],
+                "responses":
+                {
+                    "201": {
                         "description": "OK",
-                        "examples": {
-                            "application/json": [
+                        "examples":{
+                            "application/json":
+                            [
                                 {
                                     "id": 1,
-                                    "nombre": "Placeholder",
-                                    "descripcion": "Es un juego de prueba",
-                                    "categoria": "Test",
-                                    "calif_edad": "Para todas las edades"
+                                    "correo": "usuario@prueba.com",
+                                    "nombre_usuario": "UsrPrueba",
+                                    "nombre_comp": "Usuario de Prueba",
+                                    "is_admin" : 0
                                 }
                             ]
                         },
-                        "schema": {
-                            "$ref": "#/definitions/Productos"
+                        "schema":{
+                            "$ref": "#/definitions/usuarioLogueado"
                         }
                     },
                     "403": {
                         "description": "Prohibido"
                     }
                 }
-            }
-        },
-        "/api/productos/mostrarUnProducto/{id}": {
-            "get": {
-                "tags": [
-                    "Productos"
-                ],
-                "summary": "Muestra los detalles de un único producto.",
-                "description": "<p>Servicio que devuelve los datos del producto indicado por el identificador ingresado.</p>",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identificador del producto",
-                        "required": true,
-                        "default": 1
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "examples": {
-                            "application/json": {
-                                "id": 1,
-                                "nombre": "Placeholder",
-                                "descripcion": "Es un juego de prueba",
-                                "categoria": "Test",
-                                "calif_edad": "Para todas las edades"
-                            }
-                        },
-                        "schema": {
-                            "$ref": "#/definitions/Producto"
-                        }
-                    },
-                    "403": {
-                        "description": "Prohibido"
-                    }
-                }
-            }
-        },
-        "/api/productos/crearProducto": {
-            "post": {
-                "tags": [
-                    "Productos"
-                ],
-                "summary": "Registro de un producto nuevo.",
-                "description": "<p>Servicio que registra un nuevo producto a ofrecerse en GameVerse, además de vincularlo con el administrador que realizó el proceso</p>",
-                "operationId": "create",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "Producto",
-                        "in": "body",
-                        "description": "Producto a registrar, con el identificador del administrador que hizo el registro",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NuevoProducto"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Producto registrado con éxito"
-                    },
-                    "403": {
-                        "description": "Prohibido"
-                    }
-                }
-            }
-        },
-        "/api/productos/actualizarProducto/{id}": {
-            "put": {
-                "tags": [
-                    "Productos"
-                ],
-                "summary": "Edición de un producto registrado previamente.",
-                "description": "<p>Servicio que edita el producto indicado por el id de la URL</p>",
-                "operationId": "update",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identificador del producto.",
-                        "required": true,
-                        "default": 1
-                    },
-                    {
-                        "name": "Producto",
-                        "in": "body",
-                        "description": "Datos del producto.",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Producto"
-                        }
-                    }
-                ]
-            }
-        },
-        "/api/productos/eliminarProducto/{id}": {
-            "delete": {
-                "tags": [
-                    "Productos"
-                ],
-                "summary": "Eliminación de un producto registrado.",
-                "description": "<p>Servicio que elimina definitivamente el producto indicado por el id de la URL, además de desvincularlo del administrador que lo registró originalmente.</p>",
-                "operationId": "delete",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identificador del producto.",
-                        "required": true,
-                        "default": 1
-                    }
-                ]
-            }
-        },
-        "/api/administrador/mostrarTodosAdministradores": {
-            "get": {
-                "tags": [
-                    "Administrador"
-                ],
-                "summary": "Listado de todos los Administradores de GameVerse",
-                "description": "<p>Servicio que devuelve la información completa de todos los administradores creados en la plataforma de GameVerse.</p>",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "examples": {
-                            "application/json": [
-                                {
-                                    "id": 1,
-                                    "correo": "admin@prueba.com",
-                                    "password": "prueba",
-                                    "nombre_usuario": "AdmPrueba",
-                                    "nombre_comp": "Administrador de Prueba"
-                                }
-                            ]
-                        },
-                        "schema": {
-                            "$ref": "#/definitions/Administradores"
-                        }
-                    },
-                    "403": {
-                        "description": "Prohibido"
-                    }
-                }
-            }
-        },
-        "/api/administrador/mostrarUnAdministrador/{id}": {
-            "get": {
-                "tags": [
-                    "Administrador"
-                ],
-                "summary": "Muestra los detalles de un único Administrador.",
-                "description": "<p>Servicio que devuelve los datos de la cuenta de Administrador indicada por el identificador ingresado.</p>",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identificador del Administrador",
-                        "required": true,
-                        "default": 1
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "examples": {
-                            "application/json": {
-                                "id": 1,
-                                "correo": "admin@prueba.com",
-                                "password": "prueba",
-                                "nombre_usuario": "AdmPrueba",
-                                "nombre_comp": "Administrador de Prueba"
-                            }
-                        },
-                        "schema": {
-                            "$ref": "#/definitions/Administrador"
-                        }
-                    },
-                    "403": {
-                        "description": "Prohibido"
-                    }
-                }
-            }
-        },
-        "/api/administrador/crearAdministrador": {
-            "post": {
-                "tags": [
-                    "Administrador"
-                ],
-                "summary": "Creación de una cuenta nueva de administrador.",
-                "description": "<p>Servicio que crea una nueva cuenta destinada a un administrador de GameVerse</p>",
-                "operationId": "create",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "Administrador",
-                        "in": "body",
-                        "description": "Cuenta de administrador a crear",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NuevoAdministrador"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Administrador creado con éxito"
-                    },
-                    "403": {
-                        "description": "Prohibido"
-                    }
-                }
-            }
-        },
-        "/api/administrador/actualizarAdministrador/{id}": {
-            "put": {
-                "tags": [
-                    "Administrador"
-                ],
-                "summary": "Edición de un administrador registrado previamente.",
-                "description": "<p>Servicio que edita la cuenta de un administrador indicada por el id de la URL</p>",
-                "operationId": "update",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identificador del Administrador.",
-                        "required": true,
-                        "default": 1
-                    },
-                    {
-                        "name": "Administrador",
-                        "in": "body",
-                        "description": "Datos del Administrador.",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Administrador"
-                        }
-                    }
-                ]
-            }
-        },
-        "/api/administrador/eliminarAdministrador/{id}": {
-            "delete": {
-                "tags": [
-                    "Administrador"
-                ],
-                "summary": "Eliminación de un Administrador registrado.",
-                "description": "<p>Servicio que elimina definitivamente la cuenta de un Administrador indicada por el id de la URL.</p>",
-                "operationId": "delete",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Identificador del Administrador.",
-                        "required": true,
-                        "default": 1
-                    }
-                ]
             }
         }
+
     },
     "definitions": {
         "Usuarios": {
@@ -560,111 +289,52 @@
                 }
             }
         },
-        "Productos": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/Producto"
-            }
-        },
-        "Producto": {
+        "inicioSesion":
+        {
             "type": "object",
-            "properties": {
-                "id": {
-                    "type": "number",
-                    "description": "Identificador único del producto"
-                },
-                "nombre": {
+            "properties":
+            {
+                "correo":
+                {
                     "type": "string",
-                    "description": "Nombre del producto"
+                    "description": "Recibe el correo del usuario."
                 },
-                "descripcion": {
+                "contrasena":
+                {
                     "type": "string",
-                    "description": "Breve descripción del producto"
-                },
-                "categoria": {
-                    "type": "string",
-                    "description": "Categoría a la que pertenece el producto"
-                },
-                "calif_edad": {
-                    "type": "string",
-                    "description": "Calificación de edad asignado al producto"
+                    "description": "Recibe la contraseña del usuario."
                 }
             }
         },
-        "NuevoProducto": {
+        "usuarioLogueado":
+        {
             "type": "object",
-            "properties": {
-                "nombre": {
-                    "type": "string",
-                    "description": "Nombre del producto"
-                },
-                "descripcion": {
-                    "type": "string",
-                    "description": "Breve descripción del producto"
-                },
-                "categoria": {
-                    "type": "string",
-                    "description": "Categoría a la que pertenece el producto"
-                },
-                "calif_edad": {
-                    "type": "string",
-                    "description": "Calificación de edad asignado al producto"
-                },
-                "id_admin": {
+            "properties":
+            {
+                "id":
+                {
                     "type": "number",
-                    "description": "Identificador del administrador que hizo el registro"
-                }
-            }
-        },
-        "Administradores": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/Administrador"
-            }
-        },
-        "Administrador": {
-            "type": "object",
-            "properties": {
-                "id": {
+                    "description": "Guarda el id del usuario."
+                },
+                "correo":
+                {
+                    "type": "string",
+                    "description": "Guarda el correo del usuario."
+                },
+                "nombre_usuario":
+                {
+                    "type": "string",
+                    "description": "Guarda el nombre del usuario."
+                },
+                "nombre_comp":
+                {
+                    "type": "string",
+                    "description": "Guarda el nombre completo del usuario."
+                },
+                "is_admin":
+                {
                     "type": "number",
-                    "description": "Identificador único del Administrador"
-                },
-                "correo": {
-                    "type": "string",
-                    "description": "Correo electrónico del Administrador"
-                },
-                "password": {
-                    "type": "string",
-                    "description": "Contraseña del Administrador"
-                },
-                "nombre_usuario": {
-                    "type": "string",
-                    "description": "Nombre del usuario elegido para la cuenta"
-                },
-                "nombre_comp": {
-                    "type": "string",
-                    "description": "Nombre completo del Administrador"
-                }
-            }
-        },
-        "NuevoAdministrador": {
-            "type": "object",
-            "properties": {
-                "correo": {
-                    "type": "string",
-                    "description": "Correo electrónico del Administrador"
-                },
-                "password": {
-                    "type": "string",
-                    "description": "Contraseña del Administrador"
-                },
-                "nombre_usuario": {
-                    "type": "string",
-                    "description": "Nombre del usuario elegido para la cuenta"
-                },
-                "nombre_comp": {
-                    "type": "string",
-                    "description": "Nombre completo del Administrador"
+                    "description": "Identificador para saber si el usuario es administrador."
                 }
             }
         }
