@@ -12,59 +12,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.usuariosController = void 0;
+exports.administradorController = void 0;
 const database_1 = __importDefault(require("../database"));
-class UsuariosController {
-    mostrarTodosUsuarios(req, res) {
+class AdministradorController {
+    mostrarTodosAdministradores(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield database_1.default.query('SELECT * FROM usuarios');
+            const resp = yield database_1.default.query('SELECT * FROM admins');
             res.json(resp);
         });
     }
-    mostrarUnUsuario(req, res) {
+    mostrarUnAdministrador(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const resp = yield database_1.default.query('SELECT * FROM usuarios WHERE id = ?', [id]);
+            const resp = yield database_1.default.query('SELECT * FROM admins WHERE id = ?', [id]);
             if (resp.length > 0) {
                 res.json(resp[0]);
             }
             else {
-                res.status(404).json({});
+                res.status(404).json({ 'mensaje': 'No se encontró el administrador especificado' });
             }
         });
     }
-    crearUsuario(req, res) {
+    crearAdministrador(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
+            const resp = yield database_1.default.query('INSERT INTO admins SET ?', [req.body]);
             res.json(resp);
         });
     }
-    actualizarUsuario(req, res) {
+    actualizarAdministrador(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const resp = yield database_1.default.query('UPDATE usuarios SET ? WHERE id = ?', [req.body, id]);
+            const resp = yield database_1.default.query('UPDATE admins SET ? WHERE id = ?', [req.body, id]);
             res.json(resp);
         });
     }
-    eliminarUsuario(req, res) {
+    eliminarAdministrador(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const resp = yield database_1.default.query('DELETE FROM usuarios WHERE id = ?', [id]);
+            const resp = yield database_1.default.query('DELETE FROM admins WHERE id = ?', [id]);
             res.json(resp);
-        });
-    }
-    validarUsuario(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const parametros = req.body;
-            var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
-            const resp = yield database_1.default.query(consulta);
-            if (resp.length > 0) {
-                res.json(resp);
-            }
-            else {
-                res.json({ "id": "-1" });
-            }
         });
     }
 }
-exports.usuariosController = new UsuariosController;
+exports.administradorController = new AdministradorController;
