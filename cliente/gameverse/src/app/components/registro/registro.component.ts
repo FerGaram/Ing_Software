@@ -55,7 +55,7 @@ export class RegistroComponent {
           icon: 'success',
           text: 'Usuario creado exitosamente!'
         });
-        this.router.navigateByUrl('/home/productos');
+        this.router.navigateByUrl('/login');
       }, err => console.error(err));
     }
 }
