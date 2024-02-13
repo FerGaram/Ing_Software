@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Usuario';
 import { UsuarioService } from 'src/app/services/usuarios.service';
+import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   usuario = new Usuario() ;
-  constructor(private usuarioService : UsuarioService , private router: Router){
+  constructor(private usuarioService : UsuarioService , private router: Router, private http: HttpClient){
 
   }
   
@@ -32,7 +33,17 @@ export class LoginComponent {
           console.log("Usuario no es administrador, procediendo con el inicio de sesión");
           localStorage.setItem('correo', resusuario.correo);
           localStorage.setItem('id', resusuario.id);
-          this.router.navigateByUrl('/home/snake');
+          this.http.get('http://localhost:4200/Juegos/Snake/index.html').subscribe((data) => {
+            // Aquí puedes manejar la respuesta de la solicitud
+            console.log(data);
+          }, (error) => {
+            // Aquí puedes manejar cualquier error que ocurra durante la solicitud
+            console.error(error);
+          });
+        
+
+
+
         }
       } else {
         console.log("Error, Usuario o contraseña incorrectos");
