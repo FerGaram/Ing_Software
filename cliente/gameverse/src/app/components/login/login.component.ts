@@ -32,7 +32,7 @@ export class LoginComponent {
           console.log("Usuario no es administrador, procediendo con el inicio de sesión");
           localStorage.setItem('correo', resusuario.correo);
           localStorage.setItem('id', resusuario.id);
-          this.router.navigateByUrl('/home/ofertas');
+          this.router.navigateByUrl('/home/snake');
         }
       } else {
         console.log("Error, Usuario o contraseña incorrectos");
