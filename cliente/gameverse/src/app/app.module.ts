@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductosComponent } from './components/productos/productos.component';
+import { SnakeComponent } from './components/snake/snake.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductosComponent } from './components/productos/productos.component';
     LoginComponent,
     NavigationComponent,
     HomeComponent,
-    ProductosComponent
+    ProductosComponent,
+    SnakeComponent
   ],
   imports: [
     BrowserModule,
