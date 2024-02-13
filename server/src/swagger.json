@@ -113,7 +113,7 @@
                     "Usuarios"
                 ],
                 "summary": "Creación de una cuenta nueva de usuario.",
-                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse</p>",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse, solo si el correo ingresado no ha sido usado anteriormente</p>",
                 "operationId": "create",
                 "produces": [
                     "application/json"
@@ -135,6 +135,9 @@
                     },
                     "403": {
                         "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "El correo ingresado ya ha sido registrado anteriormente"
                     }
                 }
             }
@@ -427,7 +430,7 @@
                     "Administrador"
                 ],
                 "summary": "Creación de una cuenta nueva de administrador.",
-                "description": "<p>Servicio que crea una nueva cuenta destinada a un administrador de GameVerse</p>",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un administrador de GameVerse, solo si el correo ingresado no ha sido usado anteriormente</p>",
                 "operationId": "create",
                 "produces": [
                     "application/json"
@@ -449,6 +452,9 @@
                     },
                     "403": {
                         "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "El correo ingresado ya ha sido registrado anteriormente"
                     }
                 }
             }
@@ -468,14 +474,14 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Identificador del Administrador.",
+                        "description": "Identificador del administrador.",
                         "required": true,
                         "default": 1
                     },
                     {
                         "name": "Administrador",
                         "in": "body",
-                        "description": "Datos del Administrador.",
+                        "description": "Datos del administrador.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Administrador"
@@ -489,8 +495,8 @@
                 "tags": [
                     "Administrador"
                 ],
-                "summary": "Eliminación de un Administrador registrado.",
-                "description": "<p>Servicio que elimina definitivamente la cuenta de un Administrador indicada por el id de la URL.</p>",
+                "summary": "Eliminación de un administrador registrado.",
+                "description": "<p>Servicio que elimina definitivamente la cuenta de un Administrador indicada por el id de la URL, además de eliminar todos los productos vinculados a este administrador.</p>",
                 "operationId": "delete",
                 "produces": [
                     "application/json"
@@ -499,7 +505,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Identificador del Administrador.",
+                        "description": "Identificador del administrador.",
                         "required": true,
                         "default": 1
                     }
