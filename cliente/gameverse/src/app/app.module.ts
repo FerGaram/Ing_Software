@@ -12,6 +12,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HomeComponent } from './components/home/home.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { SnakeComponent } from './components/snake/snake.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SnakeComponent } from './components/snake/snake.component';
     NavigationComponent,
     HomeComponent,
     ProductosComponent,
-    SnakeComponent
+    SnakeComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
