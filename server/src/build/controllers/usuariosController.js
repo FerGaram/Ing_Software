@@ -60,5 +60,27 @@ class UsuariosController {
             res.json(resp);
         });
     }
+    validarUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const parametros = req.body;
+            var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM admins WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+            const resp = yield database_1.default.query(consulta);
+            if (resp.length > 0) {
+                resp[0]["is_admin"] = 1;
+                res.json(resp);
+            }
+            else {
+                var consulta2 = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+                const resp2 = yield database_1.default.query(consulta2);
+                if (resp2.length > 0) {
+                    resp2[0]["is_admin"] = 0;
+                    res.json(resp2);
+                }
+                else {
+                    res.json({ "id": "-1" });
+                }
+            }
+        });
+    }
 }
 exports.usuariosController = new UsuariosController;

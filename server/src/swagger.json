@@ -195,6 +195,58 @@
                 ]
             }
         },
+        "/api/usuarios/validarUsuario":
+        {
+            "post":
+            {
+                "summary":"Inicia sesión en la tienda.",
+                "description": "<p>Servicio que permite el inicio de sesión de un usuario en la tienda.</p><p>&nbsp;</p><p><em><strong>¿Como iniciar sesión en la tienda?</strong></em></p>",
+                "produces":
+                [
+                    "application/json"
+                ],
+                "parameters":
+                [
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Correo y contraseña del usuario que desea iniciar sesión.",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref" : "#/definitions/inicioSesion"
+                        }
+                    }
+                ],
+                "tags": ["Usuarios"],
+                "responses":
+                {
+                    "201": {
+                        "description": "OK",
+                        "examples":{
+                            "application/json":
+                            [
+                                {
+                                    "id": 1,
+                                    "correo": "usuario@prueba.com",
+                                    "nombre_usuario": "UsrPrueba",
+                                    "nombre_comp": "Usuario de Prueba",
+                                    "is_admin" : 0
+                                }
+                            ]
+                        },
+                        "schema":{
+                            "$ref": "#/definitions/usuarioLogueado"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+
+    
         "/api/productos/mostrarTodosProductos": {
             "get": {
                 "tags": [
