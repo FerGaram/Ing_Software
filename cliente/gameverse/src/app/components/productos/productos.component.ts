@@ -11,6 +11,7 @@ declare var M: any;
 })
 export class ProductosComponent implements OnInit {
 
+  is_admin = localStorage.getItem('is_admin');
   producto = new Producto() ;
   listaProducto: any[] = [];
   productoBuscado: any;

@@ -28,6 +28,7 @@ export class LoginComponent {
           console.log("Usuario es administrador");
           localStorage.setItem('correo', resusuario.correo);
           localStorage.setItem('id', resusuario.id);
+          localStorage.setItem('is_admin', resusuario.is_admin);
           this.router.navigateByUrl('/homeAdmin/usuarios');
         } else {
           console.log("Usuario no es administrador, procediendo con el inicio de sesión");

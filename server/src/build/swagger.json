@@ -113,7 +113,7 @@
                     "Usuarios"
                 ],
                 "summary": "Creación de una cuenta nueva de usuario.",
-                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse, solo si el correo ingresado no ha sido usado anteriormente</p>",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse</p>",
                 "operationId": "create",
                 "produces": [
                     "application/json"
@@ -135,9 +135,6 @@
                     },
                     "403": {
                         "description": "Prohibido"
-                    },
-                    "404": {
-                        "description": "El correo ingresado ya ha sido registrado anteriormente"
                     }
                 }
             }
@@ -213,7 +210,9 @@
                         }
                     }
                 ],
-                "tags": ["Usuarios"],
+                "tags": [
+                    "Usuarios"
+                ],
                 "responses": {
                     "201": {
                         "description": "OK",
@@ -606,6 +605,44 @@
                 "nombre_comp": {
                     "type": "string",
                     "description": "Nombre completo del usuario"
+                }
+            }
+        },
+        "inicioSesion": {
+            "type": "object",
+            "properties": {
+                "correo": {
+                    "type": "string",
+                    "description": "Recibe el correo del usuario."
+                },
+                "contrasena": {
+                    "type": "string",
+                    "description": "Recibe la contraseña del usuario."
+                }
+            }
+        },
+        "usuarioLogueado": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Guarda el id del usuario."
+                },
+                "correo": {
+                    "type": "string",
+                    "description": "Guarda el correo del usuario."
+                },
+                "nombre_usuario": {
+                    "type": "string",
+                    "description": "Guarda el nombre del usuario."
+                },
+                "nombre_comp": {
+                    "type": "string",
+                    "description": "Guarda el nombre completo del usuario."
+                },
+                "is_admin": {
+                    "type": "number",
+                    "description": "Identificador para saber si el usuario es administrador."
                 }
             }
         },
