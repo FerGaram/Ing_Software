@@ -212,7 +212,8 @@
                                     "id": 1,
                                     "correo": "usuario@prueba.com",
                                     "nombre_usuario": "UsrPrueba",
-                                    "nombre_comp": "Usuario de Prueba"
+                                    "nombre_comp": "Usuario de Prueba",
+                                    "is_admin": 0
                                 }
                             ]
                         },
@@ -311,6 +312,10 @@
                 "nombre_comp": {
                     "type": "string",
                     "description": "Guarda el nombre completo del usuario."
+                },
+                "is_admin": {
+                    "type": "number",
+                    "description": "Identificador para saber si el usuario es administrador."
                 }
             }
         }
