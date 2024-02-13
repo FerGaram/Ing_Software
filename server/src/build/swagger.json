@@ -1,0 +1,242 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "REST API GameVerse",
+        "description": "<html><body>Esta es la documentación de la API para el sistema de Investigación Docencia.<p>Para poder usar esta API es necesario solicitar el token y con esto poder utilizar los servicios proporcionados.</p><br><p><b>Autenticación y token de API</b></p><p>La Universidad Tecnológica de la Mixteca (UTM) proporciona el api-token. Una vez que haya creado y confirmado su cuenta.</p></body></html>",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Usuarios",
+            "description": "API para obtener información de los usuarios de GameVerse"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/usuarios/mostrarTodosUsuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listado de todos los usuarios de GameVerse",
+                "description": "<p>Servicio que devuelve la información completa de todas las cuentas de usuario creadas en la plataforma de GameVerse.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "correo": "usuario@prueba.com",
+                                    "password": "prueba",
+                                    "nombre_usuario": "UsrPrueba",
+                                    "nombre_comp": "Usuario de Prueba"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/mostrarUnUsuario/{id}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Muestra los detalles de un único usuario.",
+                "description": "<p>Servicio que devuelve los datos de la cuenta de usuario indicada por el identificador ingresado.</p>",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del usuario",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "id": 1,
+                                "correo": "usuario@prueba.com",
+                                "password": "prueba",
+                                "nombre_usuario": "UsrPrueba",
+                                "nombre_comp": "Usuario de Prueba"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/crearUsuario": {
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Creación de una cuenta nueva de usuario.",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Cuenta de usuario a crear",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoUsuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario creado con éxito"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/actualizarUsuario/{id}": {
+            "put": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Edición de un usuario registrado previamente.",
+                "description": "<p>Servicio que edita la cuenta de usuario indicada por el id de la URL</p>",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del usuario.",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Usuario",
+                        "in": "body",
+                        "description": "Datos del usuario.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/usuarios/eliminarUsuario/{id}": {
+            "delete": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Eliminación de un usuario registrada.",
+                "description": "<p>Servicio que elimina definitivamente la cuenta de usuario indicada por el id de la URL.</p>",
+                "operationId": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del usuario.",
+                        "required": true,
+                        "default": 1
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Usuarios": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Usuario"
+            }
+        },
+        "Usuario": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único del usuario"
+                },
+                "correo": {
+                    "type": "string",
+                    "description": "Correo electrónico del usuario"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Contraseña del usuario"
+                },
+                "nombre_usuario": {
+                    "type": "string",
+                    "description": "Nombre de usuario elegido para la cuenta"
+                },
+                "nombre_comp": {
+                    "type": "string",
+                    "description": "Nombre completo del usuario"
+                }
+            }
+        },
+        "NuevoUsuario": {
+            "type": "object",
+            "properties": {
+                "correo": {
+                    "type": "string",
+                    "description": "Correo electrónico del usuario"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Contraseña del usuario"
+                },
+                "nombre_usuario": {
+                    "type": "string",
+                    "description": "Nombre de usuario elegido para la cuenta"
+                },
+                "nombre_comp": {
+                    "type": "string",
+                    "description": "Nombre completo del usuario"
+                }
+            }
+        }
+    }
+}
