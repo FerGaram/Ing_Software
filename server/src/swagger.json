@@ -3,7 +3,7 @@
     "info": {
         "version": "1.0.0",
         "title": "REST API GameVerse",
-        "description": "<html><body>Esta es la documentación de la API para el sistema de Investigación Docencia.<p>Para poder usar esta API es necesario solicitar el token y con esto poder utilizar los servicios proporcionados.</p><br><p><b>Autenticación y token de API</b></p><p>La Universidad Tecnológica de la Mixteca (UTM) proporciona el api-token. Una vez que haya creado y confirmado su cuenta.</p></body></html>",
+        "description": "<html><body>Esta es la documentación de la API para la plataforma de juegos GameVerse.</body></html>",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
@@ -15,6 +15,14 @@
         {
             "name": "Usuarios",
             "description": "API para obtener información de los usuarios de GameVerse"
+        },
+        {
+            "name": "Productos",
+            "description": "API para obtener información de los productos de GameVerse"
+        },
+        {
+            "name": "Administrador",
+            "description": "API para obtener información de los administradores de GameVerse"
         }
     ],
     "schemes": [
@@ -105,7 +113,7 @@
                     "Usuarios"
                 ],
                 "summary": "Creación de una cuenta nueva de usuario.",
-                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse</p>",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un usuario de GameVerse, solo si el correo ingresado no ha sido usado anteriormente</p>",
                 "operationId": "create",
                 "produces": [
                     "application/json"
@@ -127,6 +135,9 @@
                     },
                     "403": {
                         "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "El correo ingresado ya ha sido registrado anteriormente"
                     }
                 }
             }
@@ -184,48 +195,29 @@
                 ]
             }
         },
-        "/api/usuarios/validarUsuario":
-        {
-            "post":
-            {
-                "summary":"Inicia sesión en la tienda.",
-                "description": "<p>Servicio que permite el inicio de sesión de un usuario en la tienda.</p><p>&nbsp;</p><p><em><strong>¿Como iniciar sesión en la tienda?</strong></em></p>",
-                "produces":
-                [
-                    "application/json"
+        "/api/productos/mostrarTodosProductos": {
+            "get": {
+                "tags": [
+                    "Productos"
                 ],
-                "parameters":
-                [
-                    {
-                        "name": "Usuario",
-                        "in": "body",
-                        "description": "Correo y contraseña del usuario que desea iniciar sesión.",
-                        "required": true,
-                        "schema":
-                        {
-                            "$ref" : "#/definitions/inicioSesion"
-                        }
-                    }
-                ],
-                "tags": ["Usuarios"],
-                "responses":
-                {
-                    "201": {
+                "summary": "Listado de todos los productos de GameVerse",
+                "description": "<p>Servicio que devuelve la información completa de todos los productos registrados en la plataforma de GameVerse.</p>",
+                "responses": {
+                    "200": {
                         "description": "OK",
-                        "examples":{
-                            "application/json":
-                            [
+                        "examples": {
+                            "application/json": [
                                 {
                                     "id": 1,
-                                    "correo": "usuario@prueba.com",
-                                    "nombre_usuario": "UsrPrueba",
-                                    "nombre_comp": "Usuario de Prueba",
-                                    "is_admin" : 0
+                                    "nombre": "Placeholder",
+                                    "descripcion": "Es un juego de prueba",
+                                    "categoria": "Test",
+                                    "calif_edad": "Para todas las edades"
                                 }
                             ]
                         },
-                        "schema":{
-                            "$ref": "#/definitions/usuarioLogueado"
+                        "schema": {
+                            "$ref": "#/definitions/Productos"
                         }
                     },
                     "403": {
@@ -234,34 +226,46 @@
                 }
             }
         },
-        "/api/usuarios/validarCorreoUsuario/{correo}":{
+        "/api/productos/mostrarUnProducto/{id}": {
             "get": {
-                "tags": ["Usuarios"],
-                "summary": "Valida si el correo ya está registrado.",
-                "description": "<p>Servicio que valida si el correo ingresado ya está registrado en la base de datos.</p>",
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Muestra los detalles de un único producto.",
+                "description": "<p>Servicio que devuelve los datos del producto indicado por el identificador ingresado.</p>",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "correo",
+                        "name": "id",
                         "in": "path",
-                        "description": "Correo del usuario.",
+                        "description": "Identificador del producto",
                         "required": true,
-                        "default": "usuario@prueba.com"
+                        "default": 1
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Correo válido"
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "id": 1,
+                                "nombre": "Placeholder",
+                                "descripcion": "Es un juego de prueba",
+                                "categoria": "Test",
+                                "calif_edad": "Para todas las edades"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
                     },
                     "403": {
-                        "description": "Correo inválido"
+                        "description": "Prohibido"
                     }
                 }
             }
-<<<<<<< HEAD
-=======
         },
         "/api/productos/crearProducto": {
             "post": {
@@ -426,7 +430,7 @@
                     "Administrador"
                 ],
                 "summary": "Creación de una cuenta nueva de administrador.",
-                "description": "<p>Servicio que crea una nueva cuenta destinada a un administrador de GameVerse</p>",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un administrador de GameVerse, solo si el correo ingresado no ha sido usado anteriormente</p>",
                 "operationId": "create",
                 "produces": [
                     "application/json"
@@ -448,6 +452,9 @@
                     },
                     "403": {
                         "description": "Prohibido"
+                    },
+                    "404": {
+                        "description": "El correo ingresado ya ha sido registrado anteriormente"
                     }
                 }
             }
@@ -467,14 +474,14 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Identificador del Administrador.",
+                        "description": "Identificador del administrador.",
                         "required": true,
                         "default": 1
                     },
                     {
                         "name": "Administrador",
                         "in": "body",
-                        "description": "Datos del Administrador.",
+                        "description": "Datos del administrador.",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Administrador"
@@ -488,8 +495,8 @@
                 "tags": [
                     "Administrador"
                 ],
-                "summary": "Eliminación de un Administrador registrado.",
-                "description": "<p>Servicio que elimina definitivamente la cuenta de un Administrador indicada por el id de la URL.</p>",
+                "summary": "Eliminación de un administrador registrado.",
+                "description": "<p>Servicio que elimina definitivamente la cuenta de un Administrador indicada por el id de la URL, además de eliminar todos los productos vinculados a este administrador.</p>",
                 "operationId": "delete",
                 "produces": [
                     "application/json"
@@ -498,13 +505,12 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Identificador del Administrador.",
+                        "description": "Identificador del administrador.",
                         "required": true,
                         "default": 1
                     }
                 ]
             }
->>>>>>> parent of 201ff05 (Merge remote-tracking branch 'origin/Fernando' into Frida)
         }
     },
     "definitions": {
@@ -560,52 +566,111 @@
                 }
             }
         },
-        "inicioSesion":
-        {
+        "Productos": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Producto"
+            }
+        },
+        "Producto": {
             "type": "object",
-            "properties":
-            {
-                "correo":
-                {
-                    "type": "string",
-                    "description": "Recibe el correo del usuario."
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Identificador único del producto"
                 },
-                "contrasena":
-                {
+                "nombre": {
                     "type": "string",
-                    "description": "Recibe la contraseña del usuario."
+                    "description": "Nombre del producto"
+                },
+                "descripcion": {
+                    "type": "string",
+                    "description": "Breve descripción del producto"
+                },
+                "categoria": {
+                    "type": "string",
+                    "description": "Categoría a la que pertenece el producto"
+                },
+                "calif_edad": {
+                    "type": "string",
+                    "description": "Calificación de edad asignado al producto"
                 }
             }
         },
-        "usuarioLogueado":
-        {
+        "NuevoProducto": {
             "type": "object",
-            "properties":
-            {
-                "id":
-                {
+            "properties": {
+                "nombre": {
+                    "type": "string",
+                    "description": "Nombre del producto"
+                },
+                "descripcion": {
+                    "type": "string",
+                    "description": "Breve descripción del producto"
+                },
+                "categoria": {
+                    "type": "string",
+                    "description": "Categoría a la que pertenece el producto"
+                },
+                "calif_edad": {
+                    "type": "string",
+                    "description": "Calificación de edad asignado al producto"
+                },
+                "id_admin": {
                     "type": "number",
-                    "description": "Guarda el id del usuario."
-                },
-                "correo":
-                {
-                    "type": "string",
-                    "description": "Guarda el correo del usuario."
-                },
-                "nombre_usuario":
-                {
-                    "type": "string",
-                    "description": "Guarda el nombre del usuario."
-                },
-                "nombre_comp":
-                {
-                    "type": "string",
-                    "description": "Guarda el nombre completo del usuario."
-                },
-                "is_admin":
-                {
+                    "description": "Identificador del administrador que hizo el registro"
+                }
+            }
+        },
+        "Administradores": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Administrador"
+            }
+        },
+        "Administrador": {
+            "type": "object",
+            "properties": {
+                "id": {
                     "type": "number",
-                    "description": "Identificador para saber si el usuario es administrador."
+                    "description": "Identificador único del Administrador"
+                },
+                "correo": {
+                    "type": "string",
+                    "description": "Correo electrónico del Administrador"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Contraseña del Administrador"
+                },
+                "nombre_usuario": {
+                    "type": "string",
+                    "description": "Nombre del usuario elegido para la cuenta"
+                },
+                "nombre_comp": {
+                    "type": "string",
+                    "description": "Nombre completo del Administrador"
+                }
+            }
+        },
+        "NuevoAdministrador": {
+            "type": "object",
+            "properties": {
+                "correo": {
+                    "type": "string",
+                    "description": "Correo electrónico del Administrador"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Contraseña del Administrador"
+                },
+                "nombre_usuario": {
+                    "type": "string",
+                    "description": "Nombre del usuario elegido para la cuenta"
+                },
+                "nombre_comp": {
+                    "type": "string",
+                    "description": "Nombre completo del Administrador"
                 }
             }
         }
