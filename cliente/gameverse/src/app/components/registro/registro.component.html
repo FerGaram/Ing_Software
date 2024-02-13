@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div id="register-page" class="row registro-background">
+        <div class="col s12 m6 offset-m3 l4 offset-l4">
+            <div class="card-panel z-depth-6">
+                <form class="register-form" (submit)="guardarNuevoUsuario()">
+                    <!-- Nuevo div para el título -->
+                    <div class="row">
+                        <div class="input-field col s12 center-align">
+                            <h4><a href="/registro" class="pink-text text-darken-1">Registrarse en Gameverse</a></h4> <!-- Cambiar el color del texto -->
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <label class="active" for="nombre_usuario">Nombre de Usuario </label>
+                            <input id="nombre_usuario" [(ngModel)]="usuarioNuevo.nombre_usuario" name="usuario" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <label class="active" for="nombre_usuario">Nombre Completo </label>
+                            <input id="nombre_usuario" [(ngModel)]="usuarioNuevo.nombre_comp" name="usuario" type="text" class="validate">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <label class="active" for="usuario_correo">Correo </label>
+                            <input id="usuario_correo" [(ngModel)]="usuarioNuevo.correo" name="usuario" type="email" class="validate">
+                            <span class="helper-text" data-error="Enter a valid email address"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock_outline</i>
+                            <label class="active" for="usuario_password">Password </label>
+                            <input id="usuario_password" [(ngModel)]="usuarioNuevo.password" name="usuario" type="password" class="validate">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="input-field col s12 center-align">
+                            <button class="btn waves-effect waves-dark col s12" type="submit">Registrarse</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 center-align">
+                            <p class="margin medium-small"><a href="/login" style="color: #D95B72 !important;">¿Ya tienes una cuenta? Inicia sesión</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>

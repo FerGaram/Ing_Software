@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
+const productosRoutes_1 = __importDefault(require("./routes/productosRoutes"));
+const administradorRoutes_1 = __importDefault(require("./routes/administradorRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
@@ -27,6 +29,8 @@ class Server {
     routes() {
         this.app.use(indexRoutes_1.default);
         this.app.use('/api/usuarios', usuariosRoutes_1.default);
+        this.app.use('/api/productos', productosRoutes_1.default);
+        this.app.use('/api/administrador', administradorRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

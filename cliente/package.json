@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "materialize-css": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.29",
+    "@types/materialize-css": "^1.0.14"
+  }
+}

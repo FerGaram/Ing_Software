@@ -1,0 +1,26 @@
+/* styles.css */
+
+/* Agrega un color de fondo a la página */
+.login-background {
+    background-color: #F2B279; /* Cambia el color de fondo según tu preferencia */
+}
+  
+  /* Agregar estilos al título del login */
+  #login-page h4 {
+      font-family: 'Fantasy', sans-serif; /* Cambia el tipo de fuente*/
+      font-size: 30px; /* Cambia el tamaño de fuente*/
+      font-weight: 1000; /* Cambia el grosor de la fuente*/
+      margin-top: 0px; /* Ajusta el margen superior*/
+      margin-bottom: 1px; /* Ajusta el margen inferior*/
+  }
+  
+  /* Agrega estilos al contenedor del formulario */
+  .btn, .waves-effect {
+    background-color: #F2B279 !important; /* Cambia el color de fondo de los botones y efectos */
+    color: #ffffff !important; /* Cambia el color del texto en los botones */
+  }
+  
+  .btn:hover, .waves-effect:hover {
+    background-color: #e0915f !important; /* Cambia el color de fondo al pasar el ratón sobre los botones y efectos */
+  }
+  

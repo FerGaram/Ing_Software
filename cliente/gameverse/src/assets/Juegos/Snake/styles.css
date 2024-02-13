@@ -1,0 +1,96 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  border: 5px solid rgb(13, 0, 255)
+}
+
+.canvas-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+}
+
+.background-image {
+  width: 270px; /* Ancho de tu imagen */
+  height: 476px; /* Alto de tu imagen */
+  background-image: url('flechas.png'); /* Ruta de tu imagen */
+  position: absolute; /* Posición absoluta para colocarlo en la esquina izquierda */
+  top: 1; /* Posición desde arriba */
+  left: 280px; /* Posición desde la izquierda */
+}
+
+#info {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 60px; /* Ajusta el margen superior para posicionar el juego debajo de info */
+}
+
+.controls {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 500px; /* Ajusta el margen superior para colocar los controles debajo de los canvas */
+}
+
+
+
+/* Estilos para el botón "Play" */
+#playButton {
+  padding: 10px 20px;
+  background-color: rgb(18, 9, 184);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px; /* Ajusta el margen derecho según tu diseño */
+}
+
+#playButton:hover {
+  background-color: #2980b9;
+}
+
+/* Estilos para el botón de "Velocidad" */
+#speedSelect {
+  padding: 8px;
+  background-color: #0c6834;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px; /* Ajusta el margen derecho según tu diseño */
+}
+
+/* Estilos para el botón de "Niveles" */
+#nivelSelect {
+  padding: 8px;
+  background-color: #e74c3c;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px; /* Ajusta el margen derecho según tu diseño */
+}
+
+/* Cambiar color al pasar el ratón sobre el botón de "Niveles" */
+#nivelSelect:hover {
+  background-color: #c0392b;
+}
+
+

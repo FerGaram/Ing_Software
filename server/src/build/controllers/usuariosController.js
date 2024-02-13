@@ -29,13 +29,13 @@ class UsuariosController {
                 res.json(resp[0]);
             }
             else {
-                res.status(404).json({ 'mensaje': 'No se encontró el usuario especificado' });
+                res.status(404).json({});
             }
         });
     }
     crearUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
+            const resp = yield database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
             res.json(resp);
         });
     }
@@ -49,8 +49,21 @@ class UsuariosController {
     eliminarUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const resp = yield database_1.default.query('DELETE FROM usuarios WHERE id = ?', id);
+            const resp = yield database_1.default.query('DELETE FROM usuarios WHERE id = ?', [id]);
             res.json(resp);
+        });
+    }
+    validarUsuario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const parametros = req.body;
+            var consulta = `SELECT id, correo, nombre_usuario, nombre_comp FROM usuarios WHERE correo = '${parametros.correo}' and password = '${parametros.contrasena}'`;
+            const resp = yield database_1.default.query(consulta);
+            if (resp.length > 0) {
+                res.json(resp);
+            }
+            else {
+                res.json({ "id": "-1" });
+            }
         });
     }
 }
