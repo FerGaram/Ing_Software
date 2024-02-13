@@ -19,15 +19,8 @@ class UsuariosController {
     }
 
     public async crearUsuario(req: Request, res: Response): Promise<void> {
-        const correo = req.body.correo;
-        const usuarios = await pool.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
-        if (usuarios.length < 1) {
-            const resp = await pool.query('INSERT INTO usuarios SET ?', [req.body]);
-            res.json(resp);
-        }
-        else {
-            res.status(404).json({ 'correoExistente': 'El correo ingresado ya se ha registrado previamente' })
-        }
+        const resp = await pool.query('INSERT INTO usuarios SET ?', [req.body]);
+        res.json(resp);
     }
 
     public async actualizarUsuario(req: Request, res: Response): Promise<void> {

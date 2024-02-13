@@ -35,15 +35,8 @@ class UsuariosController {
     }
     crearUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const correo = req.body.correo;
-            const usuarios = yield database_1.default.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
-            if (usuarios.length < 1) {
-                const resp = yield database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
-                res.json(resp);
-            }
-            else {
-                res.status(404).json({ 'correoExistente': 'El correo ingresado ya se ha registrado previamente' });
-            }
+            const resp = yield database_1.default.query('INSERT INTO usuarios SET ?', [req.body]);
+            res.json(resp);
         });
     }
     actualizarUsuario(req, res) {

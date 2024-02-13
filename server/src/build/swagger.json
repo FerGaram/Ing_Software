@@ -253,6 +253,251 @@
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+        },
+        "/api/productos/crearProducto": {
+            "post": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Registro de un producto nuevo.",
+                "description": "<p>Servicio que registra un nuevo producto a ofrecerse en GameVerse, además de vincularlo con el administrador que realizó el proceso</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Producto",
+                        "in": "body",
+                        "description": "Producto a registrar, con el identificador del administrador que hizo el registro",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoProducto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto registrado con éxito"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/productos/actualizarProducto/{id}": {
+            "put": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Edición de un producto registrado previamente.",
+                "description": "<p>Servicio que edita el producto indicado por el id de la URL</p>",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del producto.",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Producto",
+                        "in": "body",
+                        "description": "Datos del producto.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Producto"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/productos/eliminarProducto/{id}": {
+            "delete": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Eliminación de un producto registrado.",
+                "description": "<p>Servicio que elimina definitivamente el producto indicado por el id de la URL, además de desvincularlo del administrador que lo registró originalmente.</p>",
+                "operationId": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del producto.",
+                        "required": true,
+                        "default": 1
+                    }
+                ]
+            }
+        },
+        "/api/administrador/mostrarTodosAdministradores": {
+            "get": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Listado de todos los Administradores de GameVerse",
+                "description": "<p>Servicio que devuelve la información completa de todos los administradores creados en la plataforma de GameVerse.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "correo": "admin@prueba.com",
+                                    "password": "prueba",
+                                    "nombre_usuario": "AdmPrueba",
+                                    "nombre_comp": "Administrador de Prueba"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Administradores"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/administrador/mostrarUnAdministrador/{id}": {
+            "get": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Muestra los detalles de un único Administrador.",
+                "description": "<p>Servicio que devuelve los datos de la cuenta de Administrador indicada por el identificador ingresado.</p>",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del Administrador",
+                        "required": true,
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": {
+                                "id": 1,
+                                "correo": "admin@prueba.com",
+                                "password": "prueba",
+                                "nombre_usuario": "AdmPrueba",
+                                "nombre_comp": "Administrador de Prueba"
+                            }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Administrador"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/administrador/crearAdministrador": {
+            "post": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Creación de una cuenta nueva de administrador.",
+                "description": "<p>Servicio que crea una nueva cuenta destinada a un administrador de GameVerse</p>",
+                "operationId": "create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Administrador",
+                        "in": "body",
+                        "description": "Cuenta de administrador a crear",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NuevoAdministrador"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Administrador creado con éxito"
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/administrador/actualizarAdministrador/{id}": {
+            "put": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Edición de un administrador registrado previamente.",
+                "description": "<p>Servicio que edita la cuenta de un administrador indicada por el id de la URL</p>",
+                "operationId": "update",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del Administrador.",
+                        "required": true,
+                        "default": 1
+                    },
+                    {
+                        "name": "Administrador",
+                        "in": "body",
+                        "description": "Datos del Administrador.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Administrador"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/administrador/eliminarAdministrador/{id}": {
+            "delete": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Eliminación de un Administrador registrado.",
+                "description": "<p>Servicio que elimina definitivamente la cuenta de un Administrador indicada por el id de la URL.</p>",
+                "operationId": "delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador del Administrador.",
+                        "required": true,
+                        "default": 1
+                    }
+                ]
+            }
+>>>>>>> parent of 201ff05 (Merge remote-tracking branch 'origin/Fernando' into Frida)
         }
     },
     "definitions": {
