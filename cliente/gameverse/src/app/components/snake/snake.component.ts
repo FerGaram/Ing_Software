@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SnakeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.redirectToSnake();
+   }
 
   ngOnInit(): void {
+  }
+
+  redirectToSnake(): void {
+    window.location.href = '/assets/Juegos/Snake/index.html';
   }
 
 }

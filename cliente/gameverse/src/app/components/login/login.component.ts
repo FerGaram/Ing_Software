@@ -33,14 +33,7 @@ export class LoginComponent {
           console.log("Usuario no es administrador, procediendo con el inicio de sesión");
           localStorage.setItem('correo', resusuario.correo);
           localStorage.setItem('id', resusuario.id);
-          this.http.get('http://localhost:4200/Juegos/Snake/index.html').subscribe((data) => {
-            // Aquí puedes manejar la respuesta de la solicitud
-            console.log(data);
-          }, (error) => {
-            // Aquí puedes manejar cualquier error que ocurra durante la solicitud
-            console.error(error);
-          });
-        
+          this.router.navigateByUrl('/home/productos');
 
 
 
@@ -56,7 +49,6 @@ export class LoginComponent {
     }, err => console.error(err));
   }
 
-  
 }
 
 
