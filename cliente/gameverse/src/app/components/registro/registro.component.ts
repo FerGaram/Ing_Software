@@ -29,19 +29,7 @@ export class RegistroComponent {
         text: 'Por favor, complete todos los campos'
       });
       return;
-    }
-  
-    // Verificar si el usuario ya existe (por ejemplo, por el correo electrónico)
-    this.usuarioService.existeCorreo(this.usuarioNuevo.correo).subscribe((resUsuarios: any) => {
-      if (resUsuarios.length > 0) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          text: 'El usuario ya existe. Intente con un correo electrónico diferente.'
-        });
-        return;
-      }
-      
+    }else{
       // Si pasa las verificaciones, intentar crear el nuevo usuario
       console.log("GuardandoUsuario")
       console.log(this.usuarioNuevo.correo);
@@ -53,10 +41,10 @@ export class RegistroComponent {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          text: 'Plan Actualizado'
+          text: 'Usuario creado exitosamente!'
         });
         this.router.navigateByUrl('/home/productos');
       }, err => console.error(err));
-    }, err => console.error(err));
+    }
 }
 }

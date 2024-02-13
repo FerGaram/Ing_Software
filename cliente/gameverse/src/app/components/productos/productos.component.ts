@@ -16,7 +16,7 @@ export class ProductosComponent implements OnInit {
   productoBuscado: any;
   productoEliminado: any;
 
-  constructor(private productosService : ProductosService ,private router: Router) { }
+  constructor(private productosService: ProductosService ,private router: Router) { }
 
   ngOnInit() {
 
