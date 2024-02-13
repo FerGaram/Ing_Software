@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Usuario';
 import { UsuarioService } from 'src/app/services/usuarios.service';
-import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   usuario = new Usuario() ;
-  constructor(private usuarioService : UsuarioService , private router: Router, private http: HttpClient){
+  constructor(private usuarioService : UsuarioService , private router: Router){
 
   }
   
@@ -27,7 +25,7 @@ export class LoginComponent {
         this.usuario = resusuario
         console.log("Usuario valido");
         console.log(resusuario);
-        localStorage.setItem('correo', this.usuario.correo);
+        localStorage.setItem('correo', resusuario.correo);
         localStorage.setItem('id', resusuario.id);
         localStorage.setItem('is_admin', resusuario.is_admin);
        
