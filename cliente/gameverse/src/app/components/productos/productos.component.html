@@ -15,7 +15,7 @@
 <main>
   <div class="row">
     <div class="col s2 offset-s10" style="padding: 30px;">
-      <a *ngIf="is_admin == '1'" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" >add</i></a>
+      <a *ngIf="is_admin == '1'" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" (click)="createProduct()">add</i></a>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
                             </li>
                         </ul>
                         <h6 *ngIf="is_admin == '0'" class="texto">Comprar juego <a class="modal-trigger material-icons" ></a></h6>
-                        <h6 *ngIf="is_admin == '1'" class="texto">Editar juego <a class="modal-trigger material-icons" ></a></h6>
+                         <a *ngIf="is_admin == '1' " class="modal-trigger" (click) = "updateProduct(producto.id)"  class="waves-effect black waves-light btn"><i class="material-icons left">create</i></a>
                     </div>
 
                     
@@ -49,6 +49,101 @@
             
         </div>
 
+
+ <!-- Modal Create Product Structure-->
+ <div id="modalCreateProduct" class="modal">
+  <div class="modal-content">
+    <div class="row" style="margin-bottom: 0px !important;">
+      <div class="col s12">
+        <h5 class="center">Crear Producto</h5>
+      </div>
+    </div>
+    <div style="border: .5px solid #E31414; padding: 10px;">
+      <div class="row">
+        <div class="input-field col s12">
+          <label class="active">Nombre </label>
+          <input  [(ngModel)]="newProduct.nombre"  type="text" class="validate">
+        </div>
+        <div class="input-field col s6">
+          <label class="active">Descripción</label>
+          <input  [(ngModel)]="newProduct.descripcion"  type="text" class="validate">
+        </div>
+        <div class="input-field col s6">
+          <label class="active">Calif edad</label>
+          <input  [(ngModel)]="newProduct.calif_edad"  type="text" class="validate">
+        </div>
+        <div class="input-field col s12">
+          <label class="active">Categoria </label>
+          <input   [(ngModel)]="newProduct.categoria"  type="text" class="validate">
+        </div>
+        <div class="input-field col s12">
+          <label class="active">Admin que subió </label>
+          <select [(ngModel)]='producto.id_admin' class="browser-default"> <!-- browser-default porque es un arreglo-->
+            <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> <!--Para poner el valor de cada elemento del arreglo-->
+              {{admin.nombre_comp}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 center">
+          <button type="submit" class="waves-effect btn-large red lighten-3 modal-close" (click)="saveNewProduct()">ENVIAR</button>
+        </div>
+        <div class="col s6 center">
+          <a class="modal-action modal-close waves-effect btn-large red lighten-3black-text">CANCELAR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Update Product Structure -->
+<div id="modalUpdateProduct" class="modal">
+  <div class="modal-content">
+    <div class="row" style="margin-bottom: 0px !important;">
+      <div class="col s12">
+        <h5 class="center">Actualizar Producto</h5>
+      </div>
+    </div>
+    <div style="border: .5px solid #78909c; padding: 10px;">
+      <div class="row">
+        <div class="input-field col s12">
+          <label class="active">Nombre </label>
+          <input   [(ngModel)]="producto.nombre"  type="text" class="validate">
+        </div>
+        <div class="input-field col s6">
+          <label class="active">Descripción</label>
+          <input  [(ngModel)]="producto.descripcion"  type="text" class="validate">
+        </div>
+        <div class="input-field col s6">
+          <label class="active">Calif_edad </label>
+          <input   [(ngModel)]="producto.calif_edad"  type="text" class="validate">
+        </div>
+        <div class="input-field col s12">
+          <label class="active">Categoria </label>
+          <input   [(ngModel)]="producto.categoria"  type="text" class="validate">
+        </div>
+        <div class="input-field col s12">
+          <label class="active">Admin que subió </label>
+          <select [(ngModel)]='producto.id_admin' class="browser-default"> <!-- browser-default porque es un arreglo-->
+            <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> <!--Para poner el valor de cada elemento del arreglo-->
+              {{admin.nombre_comp}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 center">
+          <button type="submit" class="waves-effect btn-large red lighten-3 modal-close" (click)="saveUpdateProduct()">ENVIAR</button>
+        </div>
+        <div class="col s6 center">
+          <a class="modal-action modal-close waves-effect btn-large red lighten-3black-text">CANCELAR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         
 
 </main>

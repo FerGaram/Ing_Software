@@ -15,7 +15,7 @@ export class ProductosService {
   }
 
   listOne(id_producto: any) {
-    return this.http.get(`${environment.API_URI}/productos/mostrarProducto/${id_producto}`)
+    return this.http.get(`${environment.API_URI}/productos/mostrarUnProducto/${id_producto}`)
   }
 
   crearProducto(nombre: string, descripcion: string, categoria: string, calif_edad: string) {
