@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Usuario';
 import { UsuarioService } from 'src/app/services/usuarios.service';
-import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   usuario = new Usuario() ;
-  constructor(private usuarioService : UsuarioService , private router: Router, private http: HttpClient){
+  constructor(private usuarioService : UsuarioService , private router: Router){
 
   }
   
@@ -24,20 +23,11 @@ export class LoginComponent {
       if(resusuario.id != -1)
       {
         console.log("Usuario valido");
-        if (resusuario.esAdmin) {
-          console.log("Usuario es administrador");
-          localStorage.setItem('correo', resusuario.correo);
-          localStorage.setItem('id', resusuario.id);
-          this.router.navigateByUrl('/homeAdmin/usuarios');
-        } else {
-          console.log("Usuario no es administrador, procediendo con el inicio de sesión");
-          localStorage.setItem('correo', resusuario.correo);
-          localStorage.setItem('id', resusuario.id);
-          this.router.navigateByUrl('/home/productos');
-
-
-
-        }
+        localStorage.setItem('correo', resusuario[0].correo);
+        localStorage.setItem('id', resusuario[0].id);
+        localStorage.setItem('is_admin', resusuario[0].is_admin);
+       
+        this.router.navigateByUrl('/home/productos');
       } else {
         console.log("Error, Usuario o contraseña incorrectos");
         Swal.fire({

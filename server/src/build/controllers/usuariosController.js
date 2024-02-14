@@ -82,17 +82,5 @@ class UsuariosController {
             }
         });
     }
-    validarCorreoUsuario(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const correo = req.params.correo;
-            const usuarios = yield database_1.default.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
-            if (usuarios.length > 0) {
-                res.json({ usuarios });
-            }
-            else {
-                res.json({});
-            }
-        });
-    }
 }
 exports.usuariosController = new UsuariosController;

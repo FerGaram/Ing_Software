@@ -1,8 +1,8 @@
 export default{
     database: {
         host: "localhost",
-        user: "ismael",
-        password: "123",
+        user: "root",
+        password: "",
         database: "gameverse"
     }
 }
