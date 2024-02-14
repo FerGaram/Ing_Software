@@ -61,5 +61,18 @@ class ProductosController {
             res.json(resp);
         });
     }
+    filtrarCategoria(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { categoria } = req.params;
+            const resp = yield database_1.default.query('SELECT * FROM productos WHERE categoria = ?', [categoria]);
+            res.json(resp);
+        });
+    }
+    todasCategorias(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resp = yield database_1.default.query("SELECT DISTINCT categoria FROM productos");
+            res.json(resp);
+        });
+    }
 }
 exports.productosController = new ProductosController;

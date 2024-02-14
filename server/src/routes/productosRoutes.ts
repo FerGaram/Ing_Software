@@ -12,6 +12,8 @@ class ProductosRoutes {
         this.router.post('/crearProducto', productosController.crearProducto);
         this.router.put('/actualizarProducto/:id', productosController.actualizarProducto);
         this.router.delete('/eliminarProducto/:id', productosController.eliminarProducto);
+        this.router.get('/filtrarCategoria/:categoria', productosController.filtrarCategoria);
+        this.router.get('/todasCategorias', productosController.todasCategorias);
     }
 }
 const productosRoutes = new ProductosRoutes();

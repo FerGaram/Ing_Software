@@ -394,6 +394,77 @@
                 ]
             }
         },
+        "/api/productos/filtrarCategoria/{categoria}": {
+            "put": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Listado de productos con una categoría específica.",
+                "description": "<p>Servicio que devuelve una lista de los productos que pertenecen a la categoría seleccionada.</p>",
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "path",
+                        "description": "Nombre de la categoria a filtrar",
+                        "required": true,
+                        "default": "Arcade"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 1,
+                                    "nombre": "Placeholder",
+                                    "descripcion": "Es un juego de prueba",
+                                    "categoria": "Test",
+                                    "calif_edad": "Para todas las edades",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Productos"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
+        "/api/productos/todasCategorias": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Listado de las categorías diferentes registradas.",
+                "description": "<p>Servicio que devuelve una lista de las categorías registradas actualmente en los diferentes productos.</p>",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "categoria": "Test"
+                                },
+                                {
+                                    "categoria": "Acción"
+                                }
+                            ]
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Categoria"
+                        }
+                    },
+                    "403": {
+                        "description": "Prohibido"
+                    }
+                }
+            }
+        },
         "/api/administrador/mostrarTodosAdministradores": {
             "get": {
                 "tags": [
@@ -699,6 +770,15 @@
                 "id_admin": {
                     "type": "number",
                     "description": "Identificador del administrador que hizo el registro"
+                }
+            }
+        },
+        "Categoria": {
+            "type": "object",
+            "properties": {
+                "categoria": {
+                    "type": "string",
+                    "description": "Nombre de la categoría"
                 }
             }
         },
