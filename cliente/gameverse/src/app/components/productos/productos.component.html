@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col s12 m4" *ngFor="let producto of listaProducto" >
                 <div class="card">
-                    <div class="card-image">
+                  <div class="card-image" (click)="visualizarProducto(producto)">
                         <img src="assets/img/juego.avif" alt="anuncio">
 
                     </div>
