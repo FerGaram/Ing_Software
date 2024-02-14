@@ -1,4 +1,7 @@
 import { CommonModule } from '@angular/common';
+import { AfterViewInit } from '@angular/core';
+import { ElementRef } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService} from './../../services/productos.service';
@@ -10,14 +13,15 @@ import Swal from 'sweetalert2';
 declare var $: any;
 
 
+
 declare var M: any;
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent implements OnInit {
-
+export class ProductosComponent implements OnInit, AfterViewInit {
+  @ViewChild('vista') vista!: ElementRef;
   administradores: Administrador [] = [];
   is_admin = localStorage.getItem('is_admin');
   producto = new Producto() ;
@@ -26,6 +30,8 @@ export class ProductosComponent implements OnInit {
   newProduct: nuevoProducto = new nuevoProducto();
   productoEliminado: any;
   admin: Administrador = new Administrador();
+  productoSeleccionado = new Producto();
+  modalVista: any;
 
   constructor(private productosService: ProductosService ,private router: Router, private administradoresService: AdministradoresService) { 
     this.administradoresService.list().subscribe((resadmin: any) =>
@@ -63,7 +69,7 @@ export class ProductosComponent implements OnInit {
   
   saveNewProduct(){
     console.log("Saving New Product")
-    if (!this.newProduct.nombre || !this.newProduct.descripcion  || !this.newProduct.categoria  || !this.newProduct.calif_edad ) {
+    if (!this.newProduct.nombre || !this.newProduct.descripcion  || !this.newProduct.categoria  || !this.newProduct.calif_edad || !this.newProduct.id_admin ) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -97,7 +103,7 @@ export class ProductosComponent implements OnInit {
   }
 
   saveUpdateProduct() {
-    if (!this.producto.nombre  || !this.producto.descripcion  || !this.producto.categoria  || !this.producto.calif_edad ) {
+    if (!this.producto.nombre  || !this.producto.descripcion  || !this.producto.categoria  || !this.producto.calif_edad || !this.producto.id_admin) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -118,4 +124,20 @@ export class ProductosComponent implements OnInit {
   }
 }
 
+
+ngAfterViewInit() {
+  this.modalVista = M.Modal.init(this.vista.nativeElement);
+}
+
+ 
+visualizarProducto(producto: Producto) {
+  this.productoSeleccionado = producto;
+  console.log("Visualizando producto");
+  console.log(producto.nombre);
+  console.log(producto.descripcion);
+  console.log(producto.categoria);
+  console.log(producto.calif_edad);
+  if (this.modalVista)
+    this.modalVista.open();
+}
 }

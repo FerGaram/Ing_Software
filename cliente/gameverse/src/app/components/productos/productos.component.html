@@ -78,11 +78,14 @@
         </div>
         <div class="input-field col s12">
           <label class="active">Admin que subió </label>
-          <select [(ngModel)]='producto.id_admin' class="browser-default"> <!-- browser-default porque es un arreglo-->
-            <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> <!--Para poner el valor de cada elemento del arreglo-->
-              {{admin.nombre_comp}}
-            </option>
-          </select>
+          <input   [(ngModel)]="producto.id_admin"  type="text" class="validate">
+          <!--
+            <select [(ngModel)]='producto.id_admin' class="browser-default"> 
+              <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> 
+                {{admin.nombre_comp}}
+              </option>
+            </select>
+          -->
         </div>
       </div>
       <div class="row">
@@ -126,11 +129,14 @@
         </div>
         <div class="input-field col s12">
           <label class="active">Admin que subió </label>
-          <select [(ngModel)]='producto.id_admin' class="browser-default"> <!-- browser-default porque es un arreglo-->
-            <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> <!--Para poner el valor de cada elemento del arreglo-->
-              {{admin.nombre_comp}}
-            </option>
-          </select>
+          <input   [(ngModel)]="producto.id_admin"  type="text" class="validate">
+          <!--
+            <select [(ngModel)]='producto.id_admin' class="browser-default"> 
+              <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> 
+                {{admin.nombre_comp}}
+              </option>
+            </select>
+          -->
         </div>
       </div>
       <div class="row">
@@ -145,6 +151,28 @@
   </div>
 </div>
         
+
+<div #vista class="modal">
+  <div class="modal-content" style="display: flex; align-items: center; justify-content: space-between;">
+    <img src="assets/img/juego.avif" alt="anuncio" class="col s6" style="height: 500px; width: 500px;">
+    <div class="col s8 offset-s1" style="padding: 20px; background-color: #f4f4f4; border-radius: 10px;">
+      <h4 class="center" style="color: #333; font-size: 24px;"><b>{{ productoSeleccionado.nombre }}</b></h4>
+      <p style="color: #666; margin-top: 20px;"><b>Descripción: </b>{{ productoSeleccionado.descripcion }}</p>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img class="icono" loading="lazy" src="assets/img/edad.png" alt="icono age" style="height: 100px; width: auto;">
+        <p><b>{{productoSeleccionado.calif_edad}}</b></p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img class="icono" loading="lazy" src="assets/img/aplicacion.png" alt="icono" style="height: 100px; width: auto;">
+        <p><b>{{productoSeleccionado.categoria}}</b></p>
+      </div>
+      <img src="assets/img/30277.png" style="height: 100px; width: auto;" class="left-align">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+  </div>
+</div>
 
 </main>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
