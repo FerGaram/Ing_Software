@@ -42,6 +42,17 @@ class ProductosController {
         resp = await pool.query('DELETE FROM prod_admin WHERE id_producto = ?', [id]);
         res.json(resp);
     }
+
+    public async filtrarCategoria(req: Request, res: Response): Promise<void> {
+        const categoria = req.body.categoria;
+        const resp = await pool.query("SELECT * FROM productos WHERE categoria = ?", [categoria]);
+        res.json(resp);
+    }
+
+    public async todasCategorias(req: Request, res: Response): Promise<void> {
+        const resp = await pool.query("SELECT DISTINCT categoria FROM productos");
+        res.json(resp);
+    }
 }
 
 export const productosController = new ProductosController;
