@@ -20,7 +20,7 @@
   </div>
   <div class="row">
     <div class="col s2 offset-s10" style="padding: 30px;">
-      <a *ngIf="is_admin == '0'" class="btn-large waves-effect waves-light green" href="/home/snake">Try Free</a>
+      <a *ngIf="is_admin == '0'" class="btn waves-effect waves-light green" href="/home/snake">PRUEBA GRATIS EL SNAKE</a>
     </div>
   </div>
 
@@ -45,7 +45,8 @@
                             </li>
                         </ul>
                         <h6 *ngIf="is_admin == '0'" class="texto">Comprar juego <a class="modal-trigger material-icons" ></a></h6>
-                         <a *ngIf="is_admin == '1' " class="modal-trigger" (click) = "updateProduct(producto.id)"  class="waves-effect black waves-light btn">Editar <i class="material-icons left">create</i></a>
+                        <a *ngIf="is_admin == '1' " class="modal-trigger" (click) = "updateProduct(producto.id)"  class="waves-effect black waves-light btn">Editar <i class="material-icons left">create</i></a>
+                        <a *ngIf="is_admin == '1' " (click)="deleteProduct(producto.id) "class="waves-effect red waves-light btn">  <i class="material-icons left">delete</i>  </a>
                     </div>
 
                     
@@ -81,17 +82,7 @@
           <label class="active">Categoria </label>
           <input   [(ngModel)]="newProduct.categoria"  type="text" class="validate">
         </div>
-        <div class="input-field col s12">
-          <label class="active">Admin que subió </label>
-          <input   [(ngModel)]="producto.id_admin"  type="text" class="validate">
-          <!--
-            <select [(ngModel)]='producto.id_admin' class="browser-default"> 
-              <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> 
-                {{admin.nombre_comp}}
-              </option>
-            </select>
-          -->
-        </div>
+        
       </div>
       <div class="row">
         <div class="col s6 center">
@@ -132,17 +123,7 @@
           <label class="active">Categoria </label>
           <input   [(ngModel)]="producto.categoria"  type="text" class="validate">
         </div>
-        <div class="input-field col s12">
-          <label class="active">Admin que subió </label>
-          <input   [(ngModel)]="producto.id_admin"  type="text" class="validate">
-          <!--
-            <select [(ngModel)]='producto.id_admin' class="browser-default"> 
-              <option *ngFor="let admin in administradores" [value]="admin.idAdmin"> 
-                {{admin.nombre_comp}}
-              </option>
-            </select>
-          -->
-        </div>
+        
       </div>
       <div class="row">
         <div class="col s6 center">

@@ -59,6 +59,34 @@ export class ProductosComponent implements OnInit, AfterViewInit {
       console.log(this.listaProducto);
   }
 
+  deleteProduct(id: any) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No es posible revertir!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, quiero eliminarlo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productosService.eliminarProducto(id).subscribe((resproduct: any) => {
+          console.log("resproduct: ", resproduct);
+          this.listar()
+        },
+          err => console.error(err)
+        );
+
+
+        Swal.fire({
+          title: "Eliminado!",
+          text: "El producto ha sido eliminado.",
+          icon: "success"
+        });
+      }
+    });
+  }
+
 
   createProduct() {
     this.newProduct = new nuevoProducto();
@@ -69,14 +97,19 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   
   saveNewProduct(){
     console.log("Saving New Product")
-    if (!this.newProduct.nombre || !this.newProduct.descripcion  || !this.newProduct.categoria  || !this.newProduct.calif_edad || !this.newProduct.id_admin ) {
+    var id_admin = localStorage.getItem('id');
+    console.log("id_admin: ", id_admin);
+    if (id_admin != null) {
+      this.newProduct.id_admin = parseInt(id_admin);
+    }
+    if (!this.newProduct.nombre || !this.newProduct.descripcion  || !this.newProduct.categoria  || !this.newProduct.calif_edad) {
       Swal.fire({
         position: 'center',
         icon: 'error',
         text: 'Complete todos los campos'
       })
     }else{
-      this.productosService.crearProducto(this.newProduct.nombre, this.newProduct.descripcion, this.newProduct.categoria, this.newProduct.calif_edad).subscribe((res) => {
+      this.productosService.crearProducto(this.newProduct.nombre, this.newProduct.descripcion, this.newProduct.categoria, this.newProduct.calif_edad, this.newProduct.id_admin).subscribe((res) => {
         $('#modalCreateProduct').modal('close');
         this.productosService.list().subscribe((resProducts: any) => {
             this.listaProducto = resProducts;
@@ -84,7 +117,7 @@ export class ProductosComponent implements OnInit, AfterViewInit {
         Swal.fire({
             position: 'center',
             icon: 'success',
-            text: 'Created!!'
+            text: 'Creado!!'
         })
     }, err => console.error(err));
     }
@@ -103,7 +136,12 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   }
 
   saveUpdateProduct() {
-    if (!this.producto.nombre  || !this.producto.descripcion  || !this.producto.categoria  || !this.producto.calif_edad || !this.producto.id_admin) {
+    var id_admin = localStorage.getItem('id');
+
+    if (id_admin != null) {
+      this.newProduct.id_admin = parseInt(id_admin);
+    }
+    if (!this.producto.nombre  || !this.producto.descripcion  || !this.producto.categoria  || !this.producto.calif_edad) {
       Swal.fire({
         position: 'center',
         icon: 'error',
