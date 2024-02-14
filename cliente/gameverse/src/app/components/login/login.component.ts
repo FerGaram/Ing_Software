@@ -22,12 +22,10 @@ export class LoginComponent {
       console.log(resusuario);
       if(resusuario.id != -1)
       {
-        this.usuario = resusuario
         console.log("Usuario valido");
-        console.log(resusuario);
-        localStorage.setItem('correo', resusuario.correo);
-        localStorage.setItem('id', resusuario.id);
-        localStorage.setItem('is_admin', resusuario.is_admin);
+        localStorage.setItem('correo', resusuario[0].correo);
+        localStorage.setItem('id', resusuario[0].id);
+        localStorage.setItem('is_admin', resusuario[0].is_admin);
        
         this.router.navigateByUrl('/home/productos');
       } else {
