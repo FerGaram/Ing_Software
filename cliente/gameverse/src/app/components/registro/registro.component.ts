@@ -36,7 +36,7 @@ export class RegistroComponent {
       console.log(this.usuarioNuevo);
       this.usuarioService.crearUsuario(this.usuarioNuevo).subscribe((res) => {
       
-        if (res == -1) {
+        if (res == null) {
           Swal.fire({
             position: 'center',
             icon: 'error',

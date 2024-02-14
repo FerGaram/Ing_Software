@@ -15,9 +15,9 @@ export class NavigationComponent implements OnInit {
 
   logout(){
     console.log("Cerrando sesion");
-    localStorage.removeItem("id");
-    localStorage.removeItem("correo");
-    localStorage.removeItem("is_admin");
+    localStorage.removeItem("correo")
+    localStorage.removeItem("id")
+    localStorage.removeItem("is_admin")
     this.router.navigateByUrl('');
   }
 }

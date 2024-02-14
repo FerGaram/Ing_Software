@@ -15,20 +15,23 @@ export class ProductosService {
   }
 
   listOne(id_producto: any) {
-    return this.http.get(`${environment.API_URI}/productos/mostrarProducto/${id_producto}`)
+    return this.http.get(`${environment.API_URI}/productos/mostrarUnProducto/${id_producto}`)
   }
 
-  crearProducto(nombre: string, descripcion: string, categoria: string, calif_edad: string) {
+  crearProducto(nombre: string, descripcion: string, categoria: string, calif_edad: string, id_admin: any) {
     const producto = {
       nombre: nombre,
       descripcion: descripcion,
       categoria: categoria,
-      calif_edad: calif_edad
+      calif_edad: calif_edad,
+      id_admin: id_admin
     };
+    console.log(producto);
     console.log("Entrando al servicio de crear Producto");
     return this.http.post(`${environment.API_URI}/productos/crearProducto`, producto);
   }
 
+  
   actualizarProducto(nombre: string, descripcion: string, categoria: string, calif_edad: string, id: any) {
     const producto = {
       nombre: nombre,

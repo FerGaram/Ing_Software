@@ -26,7 +26,7 @@ class AdministradorController {
             res.json(resp);
         }
         else {
-            res.status(404).json({ 'correoExistente': 'El correo ingresado ya se ha registrado previamente' })
+            res.json()
         }
     }
 

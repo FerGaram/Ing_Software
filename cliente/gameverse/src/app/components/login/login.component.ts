@@ -22,9 +22,7 @@ export class LoginComponent {
       console.log(resusuario);
       if(resusuario.id != -1)
       {
-        this.usuario = resusuario
         console.log("Usuario valido");
-        console.log(resusuario);
         localStorage.setItem('correo', resusuario[0].correo);
         localStorage.setItem('id', resusuario[0].id);
         localStorage.setItem('is_admin', resusuario[0].is_admin);
