@@ -13,6 +13,21 @@
         <h1>Productos</h1>       
 </header>
 <main>
+  
+  <div class="row">
+    <div class="col s4 offset-s1">
+      <!-- Dropdown Trigger -->
+      <a class='dropdown-trigger btn pink' href='#' data-target='dropdown1'><h6>Filtrar</h6></a>
+
+      <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <li *ngFor="let categoria of categorias">
+          <a (click)="filtrar(categoria.categoria)">{{categoria.categoria}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col s2 offset-s10" style="padding: 30px;">
       <a *ngIf="is_admin == '1'" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" (click)="createProduct()">add</i></a>

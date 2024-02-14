@@ -47,4 +47,12 @@ export class ProductosService {
   eliminarProducto(id: any) {
     return this.http.delete(`${environment.API_URI}/productos/eliminarProducto/${id}`);
   }
+
+  filtrarCategoria(categoria: string) {
+    return this.http.get(`${environment.API_URI}/productos/filtrarCategoria/${categoria}`);
+  }
+
+  todasCategorias() {
+    return this.http.get(`${environment.API_URI}/productos/todasCategorias`);
+  }
 }

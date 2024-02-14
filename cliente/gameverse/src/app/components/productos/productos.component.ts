@@ -32,6 +32,7 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   admin: Administrador = new Administrador();
   productoSeleccionado = new Producto();
   modalVista: any;
+  categorias: any;
 
   constructor(private productosService: ProductosService ,private router: Router, private administradoresService: AdministradoresService) { 
     this.administradoresService.list().subscribe((resadmin: any) =>
@@ -46,6 +47,7 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.listar();
+    this.obtenerCategorias();
   }
 
 
@@ -165,6 +167,8 @@ export class ProductosComponent implements OnInit, AfterViewInit {
 
 ngAfterViewInit() {
   this.modalVista = M.Modal.init(this.vista.nativeElement);
+  var elems = document.querySelectorAll('.dropdown-trigger');
+  var instances = M.Dropdown.init(elems);
 }
 
  
@@ -177,5 +181,19 @@ visualizarProducto(producto: Producto) {
   console.log(producto.calif_edad);
   if (this.modalVista)
     this.modalVista.open();
+}
+
+obtenerCategorias() {
+  this.productosService.todasCategorias().subscribe((res: any) => {
+    this.categorias = res;
+    console.log(this.categorias);
+  });
+}
+
+filtrar(categoria: string) {
+  this.productosService.filtrarCategoria(categoria).subscribe((res: any) => {
+    this.listaProducto = res;
+  });
+  console.log(categoria);
 }
 }
